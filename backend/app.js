@@ -82,7 +82,7 @@ app.get("/users", async (req, res) => {
   }
   
   const result = await pool.query("SELECT * FROM users ORDER BY id DESC");
-  await redisClient.setex(cacheKey, 3600, JSON.stringify(result.rows)); // Cache for 1 hour
+  await redisClient.setEx(cacheKey, 3600, JSON.stringify(result.rows)); // Cache for 1 hour
   res.json(result.rows);
 });
 
